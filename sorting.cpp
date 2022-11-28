@@ -111,3 +111,27 @@ void quickSort(int a[], int low, int high) {
     quickSort(a, m+1, high); // then sort right subarray
   }
 }
+
+// O(N) for small range of integer
+void countingSort(vector<int> (&a)){
+  int maximum=*max_element(a.begin(),a.end());
+  int minimum=*min_element(a.begin(),a.end());
+  int freq[maximum-minimum+1]={0};
+  for(int i:a){
+    freq[i-minimum]++;
+  }
+  int idx=0;
+  for(int i=0;i<maximum-minimum+1;i++){
+    int f=freq[i];
+    if(f>0){
+      for(int j=0;j<f;j++){
+        a[idx]=i+minimum;
+        idx++;
+      }
+    }
+  }
+}
+
+// O(N) for large range but few digits
+void radixSort(vector<int> (&a)){
+}
