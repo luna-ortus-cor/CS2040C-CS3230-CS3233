@@ -1,0 +1,124 @@
+// Linked List
+struct Vertex { // we can use either C struct or C++/Python/Java class
+  int item; // the data is stored here, an integer in this example
+  Vertex* next; // this pointer tells us where is the next vertex
+};
+
+// consider immplementation where keep track of N, number of items in LL
+class LL{
+private:
+  Vertex *head,*tail;
+public:
+  LL(){
+    head=NULL;
+    tail=NULL;
+  }
+}
+
+// O(N)
+Vertex* Get(int i) { // returns the vertex
+  Vertex* ptr = head; // we have to start from head
+  for (int k = 0; k < i; ++k) // advance forward i time(s)
+    ptr = ptr->next; // the pointers are pointing to the higher index
+  return ptr;
+}
+
+// O(N)
+int Find(int v){
+  Vertex* ptr = head;
+  if(ptr==NULL){ //empty LL
+    return -1;
+  }
+  bool found = false;
+  int counter = 0;
+  while(ptr->item!=v){
+    counter++;
+    ptr = ptr->next;
+    if(ptr==NULL){
+      return -1;
+    }
+  }
+  return counter;
+}
+
+// O(1)
+void insertHead(int v){
+  Vertex* vtx = new Vertex(); // create new vertex vtx from item v
+  vtx->item = v;
+  vtx->next = head; // link this new vertex to the (old) head vertex
+  if(head==NULL){
+    head = vtx; // the new vertex becomes the new head
+    tail = vtx;
+  }else{
+    head = vtx;
+  }
+}
+
+// O(N)
+void insert(int i, int v){ 
+  if(head==NULL){
+    insertHead(v);
+  }else{
+    Vertex* pre = Get(i-1);
+    Vertex* aft = pre->next; // aft cannot be null, think about it
+    Vertex* vtx = new Vertex(); // create new vertex
+    vtx->item = v;
+    vtx->next = aft; // link this
+    pre->next = vtx; // and this
+  }
+}
+
+// O(1)
+void insertBack(int v){
+  Vertex* vtx = new Vertex();
+  vtx->item = v; // create new vertex vtx from item v
+  tail->next = vtx; // just link this, as tail is the i = (N-1)-th item
+  if(head==NULL){
+    tail = vtx; // now update the tail pointer
+    head = vtx;
+  }else{
+    tail = vtx;
+  }
+}
+
+// O(1)
+void removeHead(){
+  if(head==NULL){
+    return; // avoid crashing when SLL is empty
+  }else{
+    Vertex* temp = head; // so we can delete it later
+    head = head->next; // book keeping, update the head pointer
+    delete temp; // which is the old head
+  }
+}
+
+// O(N)
+void remove(int i){
+  if(head==NULL){
+    return;
+  }else{
+    Vertex* pre = Get(i-1); // traverse to (i-1)-th vertex, O(N)
+    Vertex* temp = pre->next;
+    Vertex* aft = temp->next;
+    pre->next = aft; // bypass temp
+    delete temp;
+  }
+}
+
+// O(N)
+void removeBack(){
+  if(head==NULL){
+   return;
+  }else{
+    Vertex* pre = head;
+    temp = head->next;
+    while (temp->next != null) // while my neighbor is not the tail
+      pre = pre->next;
+      temp = temp->next;
+    pre->next = null;
+    delete temp; // temp = (old) tail
+    tail = pre; // update tail pointer
+  }
+}
+  
+  
