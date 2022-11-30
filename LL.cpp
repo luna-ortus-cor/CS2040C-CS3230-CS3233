@@ -5,7 +5,7 @@ struct Vertex { // we can use either C struct or C++/Python/Java class
 };
 
 // consider immplementation where keep track of N, number of items in LL
-class LL{
+class LL:public Vertex{
 private:
   Vertex *head,*tail;
 public:
@@ -13,10 +13,18 @@ public:
     head=NULL;
     tail=NULL;
   }
+  Vertex* Get(int i);
+  int Find(int v);
+  void insertHead(int v);
+  void insert(int i, int v);
+  void insertBack(int v);
+  void removeHead();
+  void remove();
+  void removeBack();
 }
 
 // O(N)
-Vertex* Get(int i) { // returns the vertex
+Vertex* LL::Get(int i) { // returns the vertex
   Vertex* ptr = head; // we have to start from head
   for (int k = 0; k < i; ++k) // advance forward i time(s)
     ptr = ptr->next; // the pointers are pointing to the higher index
@@ -24,7 +32,7 @@ Vertex* Get(int i) { // returns the vertex
 }
 
 // O(N)
-int Find(int v){
+int LL::Find(int v){
   Vertex* ptr = head;
   if(ptr==NULL){ //empty LL
     return -1;
@@ -42,7 +50,7 @@ int Find(int v){
 }
 
 // O(1)
-void insertHead(int v){
+void LL::insertHead(int v){
   Vertex* vtx = new Vertex(); // create new vertex vtx from item v
   vtx->item = v;
   vtx->next = head; // link this new vertex to the (old) head vertex
@@ -55,7 +63,7 @@ void insertHead(int v){
 }
 
 // O(N)
-void insert(int i, int v){ 
+void LL::insert(int i, int v){ 
   if(head==NULL){
     insertHead(v);
   }else{
@@ -69,7 +77,7 @@ void insert(int i, int v){
 }
 
 // O(1)
-void insertBack(int v){
+void LL::insertBack(int v){
   Vertex* vtx = new Vertex();
   vtx->item = v; // create new vertex vtx from item v
   tail->next = vtx; // just link this, as tail is the i = (N-1)-th item
@@ -82,7 +90,7 @@ void insertBack(int v){
 }
 
 // O(1)
-void removeHead(){
+void LL::removeHead(){
   if(head==NULL){
     return; // avoid crashing when SLL is empty
   }else{
@@ -93,7 +101,7 @@ void removeHead(){
 }
 
 // O(N)
-void remove(int i){
+void LL::remove(int i){
   if(head==NULL){
     return;
   }else{
@@ -106,7 +114,7 @@ void remove(int i){
 }
 
 // O(N)
-void removeBack(){
+void LL::removeBack(){
   if(head==NULL){
    return;
   }else{
