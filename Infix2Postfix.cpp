@@ -9,8 +9,10 @@ int precedence(char c){
     return 2;
   }else if(c=='+'||c=='-'){
     return 1;
-  }else{
+  }else if(c=='('||c==')'){
     return 0;
+  }else{
+    return -1;
   }
 }
 
@@ -20,7 +22,7 @@ int main(){
   string out = "";
   
   for(int i=0;i<expr.length();i++){
-    if(precedence(expr.at(i)==0)){
+    if(precedence(expr.at(i))==-1){
       out+=expr.at(i);
     }else if(expr.at(i)=='('){
       s.push(expr.at(i));
