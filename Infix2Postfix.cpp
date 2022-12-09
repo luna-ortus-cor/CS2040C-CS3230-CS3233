@@ -43,6 +43,5 @@ int main(){
     s.pop();
   }
   cout<<out<<endl;
+  return 0;
 }
-        
-    
