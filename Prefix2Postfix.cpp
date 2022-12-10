@@ -1,4 +1,5 @@
 //+-*AB+CDE -> AB*CD+-E+
+//-*AB++CDE -> AB*CD+E+-
 
 using namespace std;
 
