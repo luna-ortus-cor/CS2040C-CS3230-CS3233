@@ -20,7 +20,7 @@ public:
   void insert(int i, int v);
   void insertBack(int v);
   void removeHead();
-  void remove();
+  void remove(int i);
   void removeBack();
 }
 
