@@ -48,4 +48,3 @@ void LL::removeHead(){
     delete temp; // which is the old head
   }
 }
-  
