@@ -3,3 +3,6 @@
 //implements Table or Map Abstract Data Type (ADT)
 //needs to support following 3 operations as efficiently as possible
 //exists(v),insert(v),remove(v)
+//if use unsorted array/vector, O(N), O(1), O(N) time complexity respectively
+//if use sorted array/vector, O(logN), O(N), O(N) time complexity respectively
+//other operations possible: min ele, max ele, next larger ele, previous smaller ele, list ele in sorted
