@@ -36,6 +36,7 @@ public:
   void preOrder(Vertex* r);
   void postOrder(Vertex* r);
   Vertex* insert(int v, Vertex* r, Vertex* p);
+  void remove(int v);
 }
 
 // O(h)~O(N)
@@ -175,4 +176,39 @@ Vertex* BST::insert(int v,Vertex* r=root,Vertex* p=NULL){
   }
   return r;
 }
-    
+
+// O(h)~O(N)
+void BST::remove(int v){
+  Vertex* ptr = Search(v);
+  if(ptr==NULL){
+    return;
+  }
+  if(ptr->right==NULL && ptr->left==NULL){
+    Vertex* p = ptr->parent;
+    if(p->left==ptr){
+      p->left=NULL;
+    }
+    if(p->right==ptr){
+      p->right==NULL;
+    }
+    delete ptr;
+  }else if(ptr->right==NULL){
+    ptr->data=ptr->left->data;
+    Vertex* temp = ptr->left;
+    ptr->left=NULL;
+    delete temp;
+  }else if(ptr->left==NULL){
+    ptr->data=ptr->right->data;
+    Vertex* temp = ptr->right;
+    ptr->right=NULL;
+    delete temp;
+  }else{
+    Vertex* succ = Search(Successor(v));
+    ptr->data = succ->data;
+    remove(succ);
+    // or, replace with predecessor also works
+    // Vertex* pred = Search(Predecessor(v));
+    // ptr->data = pred->data;
+    // remove(pred);
+  }
+}
