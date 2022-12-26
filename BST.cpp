@@ -27,7 +27,7 @@ public:
   BST(){
     root=NULL;
   }
-  Vertex* Search(Vertex* r, int v);
+  Vertex* Search(int v, Vertex* r);
   int findMin(Vertex* r);
   int findMax(Vertex* r);
   int Successor(int v);
@@ -35,17 +35,17 @@ public:
   void inOrder(Vertex* r);
   void preOrder(Vertex* r);
   void postOrder(Vertex* r);
-  void insert(int v);
+  Vertex* insert(int v, Vertex* r, Vertex* p);
 }
 
 // O(h)~O(N)
-Vertex* BST::Search(Vertex* r=root, int v){
+Vertex* BST::Search(int v, Vertex* r=root){
   if(r==NULL){
     return NULL;
   }else if(v<r->data){
-    return Search(r->left,v);
+    return Search(v,r->left);
   }else if(v>r->data){
-    return Search(r->right,v);
+    return Search(v,r->right);
   }else{
     return r;
   }
@@ -155,4 +155,24 @@ void BST::postOrder(Vertex* r=root){
   cout<<r->data<<endl;
 }
 
-  
+// O(h)~O(N)
+Vertex* BST::insert(int v,Vertex* r=root,Vertex* p=NULL){
+  if(r==NULL){
+    Vertex* vtx = new Vertex();
+    vtx->data=v;
+    vtx->right=NULL;
+    vtx->left=NULL;
+    vtx->parent=p;
+    r=vtx;
+  }else{
+    if(v<r->data){
+      r->left=insert(v,r->left,r);
+    }else if(v>r->data){
+      r->right=insert(v,r->right,r);
+    }else{
+      // if duplicate, need to handle separately
+    }
+  }
+  return r;
+}
+    
