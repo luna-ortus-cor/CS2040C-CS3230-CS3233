@@ -28,12 +28,18 @@ public:
     root=NULL;
   }
   Vertex* Search(Vertex* r, int v);
-  int findMin(vertex* r);
+  int findMin(Vertex* r);
   int findMax(Vertex* r);
+  int Successor(int v);
+  int Predecessor(int v);
+  void inOrder(Vertex* r);
+  void preOrder(Vertex* r);
+  void postOrder(Vertex* r);
+  void insert(int v);
 }
 
-// O(h)
-Vertex* BST::Search(Vertex* r, int v){
+// O(h)~O(N)
+Vertex* BST::Search(Vertex* r=root, int v){
   if(r==NULL){
     return NULL;
   }else if(v<r->data){
@@ -45,8 +51,8 @@ Vertex* BST::Search(Vertex* r, int v){
   }
 }
 
-// O(h)
-int BST::findMin(Vertex* r){
+// O(h)~O(N)
+int BST::findMin(Vertex* r=root){
   while(r!=NULL){
     if(r->left==NULL){
       return r->data;
@@ -57,8 +63,8 @@ int BST::findMin(Vertex* r){
   return NULL;
 }
 
-// O(h)
-int BST::findMax(Vertex* r){
+// O(h)~O(N)
+int BST::findMax(Vertex* r=root){
   while(r!=NULL){
     if(r->right==NULL){
       return r->data;
@@ -67,6 +73,86 @@ int BST::findMax(Vertex* r){
     }
   }
   return NULL;
+}
+
+// O(h)~O(N)
+int BST::Successor(int v){
+  Vertex* ptr = Search(root,v);
+  if(ptr==NULL){
+    return NULL;
+  }
+  if(v==findMax()){
+    return NULL;
+  }
+  if(ptr->right!=NULL){
+    return findMin(ptr->right);
+  }else{
+    Vertex* p = ptr->parent;
+    while(p!=NULL && ptr==p->right){
+      ptr = p;
+      p = ptr->parent;
+    }
+    if(p==NULL){
+      return NULL;
+    }else{
+      return p->data;
+    }
+  }
+}
+
+// O(h)~O(N)
+int BST::Predecessor(int v){
+  Vertex* ptr = Search(root,v);
+  if(ptr==NULL){
+    return NULL;
+  }
+  if(v==findMin()){
+    return NULL;
+  }
+  if(ptr->left!=NULL){
+    return findMax(ptr->left);
+  }else{
+    Vertex* p = ptr->parent;
+    while(p!=NULL && ptr==p->left){
+      ptr = p;
+      p = ptr->parent;
+    }
+    if(p==NULL){
+      return NULL;
+    }else{
+      return p->data;
+    }
+  }
+}
+
+// O(N)
+void BST::inOrder(Vertex* r=root){
+  if(r==NULL){
+    return;
+  }
+  inOrder(r->left);
+  cout<<r->data<<endl;
+  inOrder(r->right);
+}
+
+// O(N)
+void BST::preOrder(Vertex* r=root){
+  if(r==NULL){
+    return;
+  }
+  cout<<r->data<<endl;
+  preOrder(r->left);
+  preOrder(r->right);
+}
+
+// O(N)
+void BST::postOrder(Vertex* r=root){
+  if(r==NULL){
+    return;
+  }
+  postOrder(r->left);
+  postOrder(r->right);
+  cout<<r->data<<endl;
 }
 
   
