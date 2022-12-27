@@ -21,6 +21,7 @@ struct Vertex {
   Vertex* parent;
   Vertex* left;
   Vertex* right;
+  int height;
 };
 
 class AVL:public Vertex{
@@ -38,8 +39,9 @@ public:
   void inOrder(Vertex* r);
   void preOrder(Vertex* r);
   void postOrder(Vertex* r);
-  Vertex* insert(int v, Vertex* r, Vertex* p);
-  void remove(int v);
+  //Vertex* insert(int v, Vertex* r, Vertex* p);
+  //void remove(int v);
+  int getHeight();
 }
 
 // O(h)~O(N)
@@ -157,4 +159,13 @@ void AVL::postOrder(Vertex* r=root){
   postOrder(r->left);
   postOrder(r->right);
   cout<<r->data<<endl;
+}
+
+// O(1)
+int AVL::getHeight(){
+  if(root==NULL){
+    return -1;
+  }else{
+    return root.height;
+  }
 }
