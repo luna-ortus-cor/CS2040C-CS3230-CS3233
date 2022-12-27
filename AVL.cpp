@@ -14,4 +14,4 @@
 // Define AVL Tree Invariant i.e. property that will never change
 // Vertex v is said to be height-balanced iff |v.left.height - v.right.height| <= 1
 // Define balance factor bf(v)=v.left.height-v.right.height
-// Then if bf(v) != 1 || bf(v) != -1: need to rotate in order to preserve both BST and AVL invariant
+// Then if bf(v) != 1 || bf(v) != -1 || bf(v) != 0: need to rotate in order to preserve both BST and AVL invariant
