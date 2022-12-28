@@ -42,6 +42,10 @@ public:
   //Vertex* insert(int v, Vertex* r, Vertex* p);
   //void remove(int v);
   int getHeight();
+  int height(Vertex* v);
+  int bf(Vertex* v);
+  Vertex* rotateRight(Vertex* v);
+  Vertex* rotateLeft(Vertex* v);
 }
 
 // O(h)~O(N)
@@ -169,3 +173,54 @@ int AVL::getHeight(){
     return root.height;
   }
 }
+
+// O(1)
+int AVL::height(Vertex* v){
+  if(v==NULL){
+    return 0;
+  }else{
+    v->height = max(height(v->left),height(v->right))+1;
+  }
+  return v->height;
+}
+
+// O(1)
+int AVL::bf(Vertex* v){
+  return v->left->height - v->right->height;
+}
+
+//
+Vertex* AVL::rotateRight(Vertex* v){
+  if(v->left==NULL){
+    return NULL;
+  }
+  Vertex* l = v->left;
+  l->parent=v->parent;
+  v->parent=l;
+  v->left=l->right;
+  if(l->right != NULL){
+    l->right->parent=v;
+  }
+  l->right=v;
+  // update heights
+  return l;
+}
+
+// 
+Vertex* AVL::rotateLeft(Vertex* v){
+  if(v->right==NULL){
+    return NULL;
+  }
+  Vertex* r = v->right;
+  r->parent=v->parent;
+  v->parent=r;
+  v->right=r->left;
+  if(r->left != NULL){
+    r->left->parent=v;
+  }
+  r->left=v;
+  // update heights
+  return r;
+}
+  
+  
