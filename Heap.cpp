@@ -20,7 +20,31 @@
 // we can naively create a binary heap in O(NlogN) by doing N insert(v)
 // alternatively, we notice that by taking the array of numbers as the initial binary heap, 
 // we only need to correct half of the elements (leaves are considered to satisfy the heap property initially, so no change required)
-// 
+// this is O(N) instead of O(NlogN), take note that the cost of correcting an element is not O(logN) but O(h) where h is the height of the subtree
+// we can also use this for heap sort i.e. call extract N times to sort in descending order (will be ascending for a min heap), O(NlogN)
+// similarly we can use this for partial sort i.e. call extract K times to get the K largest elements (will be K smallest for a min heap), O(KlogN)
+// two ways to convert from max heap to min heap, both O(N)
+// starting from the original max heap, call heapify (i.e. make swaps to maintain heap property) on all the non-leaves (basically the second part of the fastCreate)
+// see https://www.techiedelight.com/convert-max-heap-min-heap-linear-time/
+// recreate a min heap in O(N) by negating all the values in the max heap, then fastCreate again, then re-negate
+
+class Heap{
+private:
+  vector<int> A;
+public:
+  Heap(){
+    A.push_back(0);
+  }
+  void slowCreate(vector<int> vi);
+  void fastCreate(vector<int> vi);
+  int parent(int i);
+  int left(int i);
+  int right(int i);
+  void insert(int v);
+  void remove(int i);
+  void update(int i, int newv);
+  int extract();
+}
 
 void Heap::slowCreate(vector<int> vi){
   for(int v:vi){
@@ -40,11 +64,13 @@ void Heap::fastCreate(vector<int> vi){
           swap(A[i],A[left(i)]);
           i=left(i);
         }
-      }else{
+      }else if(A[left(i)]<A[right(i)]){
         if(A[i]<A[right(i)]){
           swap(A[i],A[right(i)]);
           i=right(i);
         }
+      }else{
+        break;
       }
     }
   }
@@ -71,7 +97,7 @@ void Heap::insert(int v){
   }
 }
 
-void Heap::delete(int i){
+void Heap::remove(int i){
   A[i]=A[1]+1;
   while((i>1)&&(A[i]>A[parent(i)])){
     swap(A[i],A[parent(i)]);
@@ -79,6 +105,20 @@ void Heap::delete(int i){
   }
   extract();
 }
+
+void Heap::update(int i, int newv){
+  int oldv = A[i];
+  A[i] = newv;
+  if(newv>oldv){
+    while((i>1)&&(A[i]>A[parent(i)])){
+      swap(A[i],A[parent(i)]);
+      i=parent(i);
+    }
+  }else if(oldv>newv){
+    
+  }else{
+    //do nothing
+  }
 
 int Heap::extract(){ //returns max element for binary max heap, we can easily write similar code to return min element for binary min heap
   int ret = A[1];
@@ -91,11 +131,13 @@ int Heap::extract(){ //returns max element for binary max heap, we can easily wr
         swap(A[i],A[left(i)]);
         i=left(i);
       }
-    }else{
+    }else if(A[left(i)]<A[right(i)]){
       if(A[i]<A[right(i)]){
         swap(A[i],A[right(i)]);
         i=right(i);
       }
+    }else{
+      break;
     }
   }
   return ret;
