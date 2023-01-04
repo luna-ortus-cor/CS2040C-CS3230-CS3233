@@ -18,4 +18,18 @@
 // For a directed edge e(u,v), v is adjacent to u, but u is not necessarily adjacent to v
 // For a directed graph, the in-degree of a vertex v is the number of edges coming into v
 // For a directed graph, the out-degree of a vertex v is the nuumber of edges going out of v
-// For a directed graph, a strongly connected component (SCC) 
+// For a directed graph, a strongly connected graph is a graph where there exists a path between every pair of distinct vertices
+// A strongly connected component (SCC) is a subgraph of a directed graph G that is strongly connected
+// A cycle is a path that begins and ends with the same vertex
+// An acyclic graph is a graph with no cycles
+// In an undirected graph, each undirected edge creates a trivial cycle, but it is usually not classified as a cycle
+// A directed acyclic graph (DAG) is a directed graph that is acyclic
+// A sparse graph is a graph where E << V^2, and a dense graph is a graph where E ~ V^2
+// Examples of graphs include trees, complete graphs, bipartite graphs, DAG, and less frequently planar graphs, line graphs, star graphs, wheel graphs
+
+// Tree is a connected graph consisting of V vertices and E=V-1 edges
+// Tree has 1 unique path between any pair of vertices
+// Trees are usually undirected and unweighted, and acyclic
+// Trees are sparse graphs
+// 6-2
+
