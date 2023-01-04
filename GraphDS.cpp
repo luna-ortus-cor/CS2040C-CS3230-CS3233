@@ -10,4 +10,12 @@
 // A subgraph G' of a graph G is a (smaller) graph that contains subsets of vertices and edges of G
 // A path of length n in an (undirected) graph G is a sequence of vertices {v0, v1, ..., vn} such that there is an edge e_i between v_i and v_i+1 for all i in [0,n-1]
 // If there is no repeated vertex along the path, then it is a simple path
-
+// An undirected graph G is connected if there exists a path between every pair of distinct vertices of G
+// An undirected graph C is a connected component of the undirected graph G if:
+// 1. C is a subgraph of G
+// 2. C is connected
+// 3. No connected subgraph of G has C as a subgraph and contains vertices or edges not in C (i.e. C is the maximal subgraph that satisfies 1. and 2.)
+// For a directed edge e(u,v), v is adjacent to u, but u is not necessarily adjacent to v
+// For a directed graph, the in-degree of a vertex v is the number of edges coming into v
+// For a directed graph, the out-degree of a vertex v is the nuumber of edges going out of v
+// For a directed graph, a strongly connected component (SCC) 
