@@ -54,3 +54,15 @@
 
 // A DAG is a directed graph with no cycle
 // Used in DP problems, has at least one topological sort/order (via slight modification to dfs/bfs)
+// A topological ordering is the ordering of the vertices into a sequence such that:
+// For every edge the start vertex of the edge occurs earlier in the sequence than the end vertex
+// The transitive closure of a DAG is the graph with the most number of edges that still maintains the same reachability relation
+// The transitive reduction of a DAG is the graph with the fewest number of edges that still maintains the same reachability relation
+
+// Ways to store graph information for graph DS: adjacency matrix (AM), adjacency list (AL), edge list (EL)
+// AM is a square matrix where A[i][j] stores the weight of the edge from vertex i to vertex j
+// For unweighted graphs, we can use 1 to represent an edge, 0 otherwise, and -1 if the vertex does not exist (e.g. deleted)
+// AM has space complexity of O(V^2), even when graph is sparse
+// AL is an array of V lists, one for each vertex, where A[i] stores the list of neighbours of i
+// For weighted graphs, store pairs of (neighbour u, weight w)
+// 7-4
