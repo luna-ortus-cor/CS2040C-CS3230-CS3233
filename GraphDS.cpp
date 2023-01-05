@@ -31,5 +31,26 @@
 // Tree has 1 unique path between any pair of vertices
 // Trees are usually undirected and unweighted, and acyclic
 // Trees are sparse graphs
-// 6-2
+// Tree with one of its vertices designated as root is a rooted tree
+// In a rooted tree, every vertex has a parent, except the root, which has NONE/NULL
+// In a rooted tree, every vertex may or may not have children i.e. the vertex may be the parent vertex of another vertex
+// In a rooted tree, the ancestors of a vertex are all the vertices contained in the path between the vertex and the root (inclusive)
+// In a rooted tree, the descendants of a vertex are all the vertices for which the vertex is an ancestor
+// The level of a tree starts from 0 (the root), and the height of a tree is its maximum level
+// We can further define additional properties for various trees
+// For a binary tree, it is a rooted tree where a vertex has at most two children
+// A full binary tree is a binary tree where each non-leaf vertex has exactly two children
+// A complete binary tree is a binary tree where each level, except possibly the last, is completely filled, and the last level has vertexes as far left as possible
 
+// A complete graph has V vertices and E=V(V-1)/2=O(V^2) edges i.e. there exists an edge between every pair of distinct vertices
+// A complete graph with V vertices is denoted by K_V
+// A complete graph is the most dense simple graph
+
+// A bipartite graph is an undirected graph with V vertices that can be partitioned into 2 disjoint sets of vertices of size m and n, V=m+n
+// There is no edge between vertices in the same set
+// Bipartite graphs do not have odd-length cycles, only even-length cycles (if any)
+// A bipartite graph can also be complete, i.e. all m vertices from one disjoint set are connected to all n vertices in the other disjoint set
+// When m=n=V/2, the complete bipartite graph has E=O(V^2)
+
+// A DAG is a directed graph with no cycle
+// Used in DP problems, has at least one topological sort/order (via slight modification to dfs/bfs)
