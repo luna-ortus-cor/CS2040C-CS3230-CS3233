@@ -63,6 +63,18 @@
 // AM is a square matrix where A[i][j] stores the weight of the edge from vertex i to vertex j
 // For unweighted graphs, we can use 1 to represent an edge, 0 otherwise, and -1 if the vertex does not exist (e.g. deleted)
 // AM has space complexity of O(V^2), even when graph is sparse
+// AM can be implemented using vector<vector<int>>
 // AL is an array of V lists, one for each vertex, where A[i] stores the list of neighbours of i
 // For weighted graphs, store pairs of (neighbour u, weight w)
-// 7-4
+// AL has space complexity of O(V+E)
+// AL can be implemented using vector<vector<pair<int,int>>
+// EL is a collection of edges with both connecting vertices and their weights
+// Typically sorted in increasing order of weights, and bidirectional edges are listed once for undirected and twice for directed graphs
+// EL has space complexity of O(E)
+// EL can be implemented using vector<tuple<int,int,int>>
+
+// Usual stuff to do: Count V, Count E, Enumerate neighbours of vertex u, Check existence of edge (u,v)
+// Counting V can be done in O(V) or O(1) for AM, AL, for EL depends as isolated vertices will not have edges and will not show up on EL, but if not, O(E)
+// Counting E can be done in O(E) for EL, O(V+E) for AL by summing length of each list (and divide by 2 for undirected), O(V^2) for AM
+// Enumerate neighbours of vertex is O(V) for AM, O(k) for AL if vertex u has k neighbours, O(E) for EL
+// To check existence of edge is O(1) for AM, O(k) for AL if vertex u has k neighbours, O(E) for EL
