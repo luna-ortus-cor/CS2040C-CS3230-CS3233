@@ -76,12 +76,159 @@ int main(){
 // To perform topological sort on a DAG, we can use either DFS or BFS. Topological sort is a linear ordering of the DAG's vertices in which each vertex comes before
 // all vertices to which it has outbound edges
 // Every DAG has at least one topological sorts/orderings
-
+// For DFS:
+int main(){
+    int numv; //number of vertices
+    vector<int> visited(numv,0);
+    vector<int> topo;
+    for(int i=0;i<numv;i++){
+        if(visited[i]==0){
+            DFS(i);
+            topo.push_back(i);
+        }
+    }
+    reverse(topo.begin(),topo.end());
+    for(auto v:topo){
+        cout<<v<<endl;
+    }
+}
+// For BFS: Kahn's Algorithm
+int main(){
+    int numv;
+    vector<vector<int>> AL; //adjacency list (or AM or EL, just change how neighbours are obtained)
+    queue<int> Q;
+    list<int> topo;
+    visited<int>(numv,0);
+    vector<int> source(numv,0);
+    for(int i=0;i<numv;i++){ //add vertices with no incoming edge to Q
+        for(int j:AL[i]){
+            source[j]++;
+        }
+    }
+    for(int i=0;i<numv;i++){
+        if(source[i]==0){
+            Q.push(i);
+        }
+    }
+    while(!Q.empty()){
+        int u=Q.front();
+        topo.push_back(u);
+        visited[u]=1;
+        Q.pop();
+        vector<int> blank;
+        for(int v:AL[u]){
+            if(source[v]>0){
+                v--;
+            }
+            if(source[v]==0&&visited[v]==0){
+                visited[v]=1;
+                Q.push(v);
+            }
+        }
+        AL[u]=blank;
+    }
+    for(auto v:topo){
+        cout<<v<<endl;
+    }
+}             
+// Bipartite graph checker: use BFS, start from the source and colour source A. Then, colour all of its neighbours colour B. Continue BFS while alternating colours
+// If at any point we find neighbour that is already coloured (i.e. visited) and is same colour as current vertex, then graph is not bipartite
+// Typically bipartite graphs are undirected
+bool isbipartite(){
+    int numv;
+    vector<vector<int>> AL; //adjacency list (or AM or EL, just change how neighbours are obtained)
+    queue<pair<int,int>> Q;
+    visited<int>(numv,-1);
+    for(int i=0;i<numv;i++){
+        if(visited[i]==-1){
+            Q.push(make_pair(i,0));
+            visited[i]=0;
+            while(!Q.empty()){
+                int u=Q.front().first;
+                int col = Q.front().second;
+                int newcol=(col+1)%2;
+                Q.pop();
+                for(int v:AL[u]){
+                    if(visited[v]==-1){
+                        visited[v]=newcol;
+                        Q.push(make_pair(v,newcol));
+                    }else if(visited[v]==col){
+                        return false;
+                    }else{
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+// We can also check if a graph is bipartite using DFS instead, using a similar logic to BFS, but will need to modify the DFS method itself
+bool DFS(int s){
+    vector<int> neighbours = AL[s];
+    for(auto v:neighbours){
+        if(visited[v]==-1){
+            visited[v]=(visited[s]+1)%2;
+            DFS(v);
+        }else if(visited[s]==visited[v]){
+            return false;
+        }else{
+            continue;
+        }
+    }
+    return true;
+}
+bool isbipartite(){
+    int numv;
+    vector<vector<int>> AL; //adjacency list (or AM or EL, just change how neighbours are obtained)
+    visited<int>(numv,-1);
+    for(int i=0;i<numv;i++){
+        if(visited[i]==-1){
+            visited[i]=0;
+            if(DFS(i)==false){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+// To find cut vertices and bridge, we need to modify the DFS/BFS algorithm
+// A cut vertex (aka articulation point), is a vertex of an undirected graph whereby removing the vertex would disconnect the graph
+// Similarly, a bridge is an edge of an undirected graph whereby removing the edge would disconnect the graph
 
 
 // code for DFS/BFS
+// TODO: numv,AL/AM/EL,visited,Q should be declared outside function
 void DFS(int s){
+    int numv; //number of vertices
+    vector<vector<int>> AL; //adjacency list (or AM or EL, just change how neighbours are obtained)
+    vector<int> visited(numv,0);
+    if(visited[s]==0){
+        vector<int> neighbours = AL[s];
+        visited[s]=1;
+        for(auto v:neighbours){
+            if(visited[v]==0){
+                DFS(v);
+            }
+        }
+    }else{
+        return;
+    }
 }
 
 void BFS(int s){
+    int numv; //number of vertices
+    vector<vector<int>> AL; //adjacency list (or AM or EL, just change how neighbours are obtained)
+    vector<int> visited(numv,0);
+    queue<int> Q;
+    while(!Q.empty()){
+        int u=Q.front();
+        Q.pop();
+        for(int v:AL[u]){
+            if(visited[v]==0){
+                visited[v]=1;
+                Q.push(v);
+            }
+        }
+    }
 }
