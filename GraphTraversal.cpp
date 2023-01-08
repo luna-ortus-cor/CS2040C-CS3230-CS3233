@@ -64,6 +64,19 @@ int main(){
   cout<<cc<<endl;
   // possible to modify DFS/BFS if want to label which vertex in which cc
 }
+// To detect cycle using DFS, modify visited array to keep track of: unvisited (vertex unexplored), explored (vertex visited but have not visited all neighbours), 
+// and visited (vertex and neighbours all visited, DFS is about to backtrack to predecessor)
+// If DFS at vertex x and encounters vertex y, where visited[y] is explored, then cycle exists as vertex y from unvisited->explored, 
+// but able to reach vertex x from vertex y, and from vertex x to vertex y again
+// This DFS method works for both directed and undirected graphs. In particular, for undirected graph, we do not need explored, only need check for visited or not
+// This method will not work for BFS on directed graphs
+// For BFS cycle detection on undirected graphs, just check if vertex has been visited or not, i.e.
+// From vertex x, check neighbour vertex y. If y is visited and x does not have y as a predecessor/parent, then there is a cycle
+// Alternatively for directed graphs, use either BFS or DFS to check if there is a topological sort, if there isn't then there is a cycle
+// To perform topological sort on a DAG, we can use either DFS or BFS. Topological sort is a linear ordering of the DAG's vertices in which each vertex comes before
+// all vertices to which it has outbound edges
+// Every DAG has at least one topological sorts/orderings
+
 
 
 // code for DFS/BFS
