@@ -14,7 +14,7 @@
 // The same thing happens for v_2, v_3, ..., v_n until all neighbours have been traversed
 // To avoid problem of cycles (whereby vertices are visited over and over again), keep track of visited status with a vector, only visit if not visited yet
 // When run out of new vertices to explore, backtrack to previous vertex
-// Use another vector to keep track of predecessor/parent vertex, set predecessor of source vertex to -1
+// Use another vector to keep track of predecessor/parent vertex, set predecessor of source vertex to -1, i.e. vector<int> p
 // The sequence of vertices from a vertex u that is reachable from the source vertex s back to s forms the DFS spanning tree
 // Explore all vertices = O(V), at each vertex explore all edges, total edges = E, so O(E) => total time complexity = O(V+E), only if use AL
 
@@ -23,11 +23,52 @@
 // Uses a queue to traverse as broadly as possible before going deeper
 // For a vertex u with n neighbours, BFS will visit v_1, v_2, ..., v_n in order, before visiting the immediate neighbours of v_1, then v_2, and so on
 // To avoid problem of cycles (whereby vertices are visited over and over again), keep track of visited status with a vector, only visit if not visited yet
-// No need to store predecessor/parent vertex as no backtracking involved
+// No need to store predecessor/parent vertex as no backtracking involved, but we may for ease of printing out traversal path, i.e. vector<int> p
 // The sequence of vertices from a vertex u that is reachable from the source vertex s back to s forms the BFS spanning tree
 // The BFS spanning tree is also the SSSP spanning tree for unweighted graph
 // Explore all vertices = O(V), at each vertex explore all edges, total edges = E, so O(E) => total time complexity = O(V+E), only if use AL
 
-// 7
+// Example use cases of DFS/BFS: 1. Reachability test, 2. Printing traversal path, 3. Identifying/labelling/counting connected components of undirected graphs,
+// 4. Detecting if graph is cyclic, 5. Topological sort (only on DAG), 6. Bipartite graph checker, 7. Find cut vertices and bridge, 8. Find SCC, 9. 2-SAT checker
+
+// To check if vertex s and vertex t are reachable from each other, call DFS(s) or BFS(s), check if visited[t] is visited; this is O(V+E)
+// To print out traversal path, we set p[v]=u each time we traverse from vertex u to vertex v, to find traversed path from vertex s to vertex t, call DFS(s) or BFS(s),
+// then backtrack(t), where (recursively)
+void backtrack(t){
+    if(t==-1) break;
+    backtrack(p[t]);
+    cout<<t<<endl;}
+// or (iteratively), 
+void backtrack(t){
+    list<int> vertices;
+    while(t!=-1){
+        vertices.push_front(t);
+        t=p[t];}
+    for(auto v:vertices){
+        cout<<v<<endl;}}
+// This is O(V+E) for DFS/BFS and O(V) for backtrack
+// Identifying connected components (i.e. enumerate all vertices reachable from vertex s) in an undirected graph can be done by calling DFS(s) or BFS(s) 
+// and enumerate all vertex v that are visited; this forms 1 connected component (CC) and is O(V+E) for DFS/BFS and O(V) for checking visited array
+// Counting number of CCs, O(V+E):
+int main(){
+  int numv; //number of vertices
+  int cc = 0;
+  vector<int> visited(numv,0);
+  for(int i=0;i<numv;i++){
+    if(visited[i]==0){
+      cc++;
+      DFS(i); //either this
+      BFS(i); //or this
+    }
+  }
+  cout<<cc<<endl;
+  // possible to modify DFS/BFS if want to label which vertex in which cc
+}
 
 
+// code for DFS/BFS
+void DFS(int s){
+}
+
+void BFS(int s){
+}
