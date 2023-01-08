@@ -196,6 +196,9 @@ bool isbipartite(){
 // A cut vertex (aka articulation point), is a vertex of an undirected graph whereby removing the vertex would disconnect the graph
 // Similarly, a bridge is an edge of an undirected graph whereby removing the edge would disconnect the graph
 
+// TODO cut vertice and bridge implementation
+// TODO find SCC implementation
+// TODO 2-SAT implementation
 
 // code for DFS/BFS
 // TODO: numv,AL/AM/EL,visited,Q should be declared outside function
