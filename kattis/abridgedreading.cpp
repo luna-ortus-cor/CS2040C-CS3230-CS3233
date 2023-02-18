@@ -2,6 +2,13 @@
 
 using namespace std;
 
+# we first store number of pages in each chapter, as well as their pre-requisite (parent)
+# we also store which chapters are cumulative chapters by noting which chapters are not pre-requisites for another chapter
+# then, for each cumulative chapter, we calculate the total number of pages
+# finally, for every pair of cumulative chapters, we find the number of pages by considering where the parents of the 2 chapters intersect, as any chapters
+# that are parents for both cumulative chapters will be double counted
+# then we just take the minimum over the nested for loop
+
 int main(){
     int n,m;
     cin>>n>>m;
