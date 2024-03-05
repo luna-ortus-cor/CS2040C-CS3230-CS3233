@@ -1,1 +1,1 @@
-puts gets.gsub(/(?<=\w)./,'')
+puts gets.scan(/[A-Z]/)*''
