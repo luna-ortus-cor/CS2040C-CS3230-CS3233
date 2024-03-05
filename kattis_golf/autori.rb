@@ -1,1 +1,1 @@
-puts gets.scan(/[A-Z]/)*''
+puts gets.delete'^A-Z'
