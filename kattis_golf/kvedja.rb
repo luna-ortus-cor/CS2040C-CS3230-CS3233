@@ -1,0 +1,1 @@
+puts"Kvedja,\n"+gets
