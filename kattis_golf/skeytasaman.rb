@@ -1,0 +1,1 @@
+$><<gets.chop+gets
