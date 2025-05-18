@@ -1,7 +1,7 @@
 import sys
 
 #again, number theory
-#by taking the digit sum of 9n twice, we can guarantee result of 9
+#by taking the digit sum of 9x twice, we can guarantee result of 9
 #then just add n-9 to get n
 
 t=int(sys.stdin.readline())
