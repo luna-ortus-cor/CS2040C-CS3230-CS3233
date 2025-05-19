@@ -1,0 +1,1 @@
+print<>gt<>?'no':'go'
