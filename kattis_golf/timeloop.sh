@@ -1,0 +1,1 @@
+xargs seq|sed aAbracadabra
