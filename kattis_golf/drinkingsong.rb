@@ -1,0 +1,1 @@
+n,$d=gets.to_i,gets.chop;n.downto(1){|i|$b="bottle#{'s'if i>1}";puts"#{i} #$b of #$d on the wall, #{i} #$b of #$d.\nTake #{i<2?:it:'one'} down, pass it around, #{i<2?'no more bottles':"#{i-1} bottle#{'s'if i>2}"} of #$d#{i>1?" on the wall.":?.}\n\n"}
