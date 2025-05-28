@@ -1,0 +1,1 @@
+(t=[a=0,0];gets.to_i.times{d,s=gets.split;d=[[0,-1],[-1,0],[1,0],[0,1]][d.ord/5%4];a=[0,1].map{t[_1]+=e=d[_1]*s.to_i;[[0,a[_1]+e].max,$a[_1]-1].min}};puts"Robot thinks #{t*' '}\nActually at #{a*' '}\n\n")while(($a=gets.split.map &:to_i)!=[0,0])
