@@ -1,0 +1,1 @@
+puts ([?U,?A,?P,?C]-gets.chars)*''
