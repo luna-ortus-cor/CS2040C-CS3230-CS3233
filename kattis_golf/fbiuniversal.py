@@ -1,0 +1,1 @@
+for _ in range(int(input())):k,s=input().split();v=['0123456789ACDEFHJKLMNPRTVWX'.index(c)for c in s.translate(str.maketrans('BGIOQSUYZ','8C10055V2'))];print(k,'Invalid'if sum(a*b for a,b in zip(v,[2,4,5,7,8,10,11,13]))%27!=v[8]else sum(v[i]*27**(7-i)for i in range(8)))
