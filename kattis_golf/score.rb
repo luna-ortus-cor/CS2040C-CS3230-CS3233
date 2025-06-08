@@ -1,0 +1,1 @@
+gets;h=a=b=c=d=0;$<.map{|l|t,p,m=l.split;p=p.to_i;m=m.split(?:).reduce{_1.to_i*60+_2.to_i};e=m-d;b+=e if h>a;c+=e if a>h;t<?B?a+=p:h+=p;d=m};g=1920-d;h>a ?b+=g:c+=g;f=->x{"%d:%02d"%[x/60,x%60]};puts"#{h>a ??H:?A} #{f[b]} #{f[c]}"
