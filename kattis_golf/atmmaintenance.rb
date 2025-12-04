@@ -1,1 +1,1 @@
-k=gets.split[1].to_i;gets.split.map{print k<(r=_1.to_i)?0:(k-=r;1)}
+_,k,*r=$<.read.split.map &:to_i;r.map{print k<_1 ?0:(k-=_1;1)}
