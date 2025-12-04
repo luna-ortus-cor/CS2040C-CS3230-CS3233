@@ -14,6 +14,7 @@ using namespace std;
 #define numLeadingZero(S) (__builtin_clz(S))    // note this is undefined behaviour if S is 0
 #define numTrailingZero(S) (__builtin_ctz(S))   // note this is undefined behaviour if S is 0
 #define indexLSOne(S) (__builtin_ffs(S))        // note this returns 1 + index of LSOne
+#define parity(S) (__builtin_parity(S))         // returns 1 if odd number of 1s in S else 0 if even number of 1s in S
 //refer to https://gcc.gnu.org/onlinedocs/gcc/Bit-Operation-Builtins.html for more builtin functions
 
 #define modulo(S, N) ((S) & (N-1))              // returns S%N where N is a power of 2
