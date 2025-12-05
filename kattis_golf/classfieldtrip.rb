@@ -1,0 +1,1 @@
+puts$<.read.chars.sort*''
