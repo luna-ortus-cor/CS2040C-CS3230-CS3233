@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 //Use LCA with RMQ using sparse table, dfs to create euler and first array
@@ -86,6 +85,8 @@ int main(){
     }
     
     for(int i=0;i<M;i++){
+        ios_base::sync_with_stdio(false);
+        cin.tie(0);
         int a,b;
         cin>>a>>b;
         int R = max(first[forwardmapping[a]],first[forwardmapping[b]]);
@@ -99,6 +100,7 @@ int main(){
             cout<<"Yes"<<endl;
         }
     }
+    return 0;
 }
 
 //memory limit exceeded
