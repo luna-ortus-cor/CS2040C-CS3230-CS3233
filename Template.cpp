@@ -1,6 +1,6 @@
 #pragma GCC optimize("Ofast")
 #pragma GCC optimize("unroll-loops")
-#pragma GCC target("avx2")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
 #include <bits/stdc++.h>
 #define rep2(i, s, n) for(ll i = ll(s); i < ll(n); i++)
 #define rep(i, n) rep2(i, 0, n)
