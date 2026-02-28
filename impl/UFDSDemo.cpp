@@ -1,4 +1,4 @@
-// Taken from https://github.com/stevenhalim/cpbook-code/blob/master/ch2/ourown/unionfind_ds.cpp
+// taken from https://github.com/stevenhalim/cpbook-code/blob/master/ch2/ourown/unionfind_ds.cpp
 // FOR REFERENCE PURPOSES
 
 // Union-Find Disjoint Sets Library written in OOP manner, using both path compression and union by rank heuristics
