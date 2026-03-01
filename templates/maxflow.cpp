@@ -59,9 +59,9 @@ public:
     }
 
     // Returns the ID of the forward edge
-    int add_edge(int u, int v, ll w, bool directed = true) {
+    ll add_edge(int u, int v, ll w, bool directed = true) {
         if (u == v) return -1;
-        int id = (int)EL.size();
+        ll id = (ll)EL.size();
         AL[u].push_back(id);
         EL.push_back({u, v, w, 0});
         AL[v].push_back(id + 1);
