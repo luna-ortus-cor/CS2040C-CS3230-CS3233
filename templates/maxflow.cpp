@@ -154,7 +154,7 @@ public:
     }
 
     // Remove an edge (no assert, must reset flow and rerun dinic)
-    void remove_edge_safe(int edge_id) {
+    void remove_edge(int edge_id) {
         if (edge_id < 0 || edge_id >= (int)EL.size()) return;
         EL[edge_id].cap = 0;
         EL[edge_id ^ 1].cap = 0;
