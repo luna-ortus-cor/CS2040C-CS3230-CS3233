@@ -68,6 +68,38 @@ private:
         }
     }
 
+    // O(log N) Walk: Find first index i in [qL, qR] such that A[i] >= val
+    int walk_first(int p, int L, int R, int qL, int qR, ll val) {
+        // 1. Out of range or no element in this subtree is large enough
+        if (L > qR || R < qL || tree[p].mx < val) return -1;
+        
+        // 2. Leaf node reached
+        if (L == R) return L;
+
+        push(p, L, R);
+        int m = (L + R) / 2;
+        
+        // 3. Try left subtree first
+        int res = walk_first(2 * p, L, m, qL, qR, val);
+        
+        // 4. If not in left, try right subtree
+        if (res == -1) {
+            res = walk_first(2 * p + 1, m + 1, R, qL, qR, val);
+        }
+        return res;
+    }
+
+    // O(log N) Walk: Find last index i in [qL, qR] such that A[i] >= val
+    int walk_last(int p, int L, int R, int qL, int qR, ll val) {
+        if (L > qR || R < qL || tree[p].mx < val) return -1;
+        if (L == R) return L;
+        push(p, L, R);
+        int m = (L + R) / 2;
+        int res = walk_last(2 * p + 1, m + 1, R, qL, qR, val); // Right first
+        if (res == -1) res = walk_last(2 * p, L, m, qL, qR, val);
+        return res;
+    }
+
     void build(const vll& A, int p, int L, int R) {
         if (L == R) {
             tree[p] = {A[L], A[L], A[L], A[L]};
@@ -136,6 +168,9 @@ public:
     ll query_min(int i, int j) { return query_internal(1, 0, n - 1, i, j).mn; }
     ll query_max(int i, int j) { return query_internal(1, 0, n - 1, i, j).mx; }
     ll query_xor(int i, int j) { return query_internal(1, 0, n - 1, i, j).xr; }
+
+    int find_first_geq(int i, int j, ll val) { return walk_first(1, 0, n - 1, i, j, val); }
+    int find_last_geq(int i, int j, ll val) { return walk_last(1, 0, n - 1, i, j, val); }
 };
 
 int main() {
