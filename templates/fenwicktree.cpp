@@ -48,17 +48,23 @@ public:
         build(f);
     }
 
+    // updates BY v, not TO v
     void update(int i, ll v) {
         for (; i <= n; i += LSOne(i)) ft[i] += v;
+        //for (; i <= n; i += LSOne(i)) ft[i] ^= v; // modification for XOR
     }
 
     ll query(int i) {
         ll sum = 0;
         for (; i > 0; i -= LSOne(i)) sum += ft[i];
+        //for (; i > 0; i -= LSOne(i)) sum ^= ft[i]; // modification for XOR
         return sum;
     }
 
-    ll query(int i, int j) { return query(j) - query(i - 1); }
+    ll query(int i, int j) {
+        return query(j) - query(i - 1);
+        //return query(j) ^ query(i - 1); // modification for XOR
+    }
     
     // Optimized select: Returns the smallest index i such that query(i) >= k
     // Uses Binary Lifting - O(log N)
