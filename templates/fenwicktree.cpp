@@ -7,14 +7,6 @@ typedef vector<int> vi;
 #define LSOne(S) ((S) & -(S))
 
 // 1. Unified 1D Fenwick Tree (PURQ + Binary Lifting)
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef long long ll;
-typedef vector<ll> vll;
-typedef vector<int> vi;
-#define LSOne(S) ((S) & -(S))
-
 class FenwickTree {
 private:
     vll ft;
