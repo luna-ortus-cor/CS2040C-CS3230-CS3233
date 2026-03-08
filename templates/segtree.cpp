@@ -151,6 +151,18 @@ private:
                            query_internal(2 * p + 1, m + 1, R, i, j));
     }
 
+    int find_prefix_sum(int p, int L, int R, ll target){
+        if(L == R) return L;
+    
+        push(p,L,R);
+        int m=(L+R)/2;
+    
+        if(tree[2*p].sum >= target)
+            return find_prefix_sum(2*p, L, m, target);
+        else
+            return find_prefix_sum(2*p+1, m+1, R, target-tree[2*p].sum);
+    }
+
 public:
     SegmentTree(const vll& A) {
         n = A.size();
@@ -171,6 +183,11 @@ public:
 
     int find_first_geq(int i, int j, ll val) { return walk_first(1, 0, n - 1, i, j, val); }
     int find_last_geq(int i, int j, ll val) { return walk_last(1, 0, n - 1, i, j, val); }
+
+    int find_prefix_sum(ll target){
+        if(tree[1].sum < target) return -1;
+        return find_prefix_sum(1,0,n-1,target);
+    }
 };
 
 int main() {
