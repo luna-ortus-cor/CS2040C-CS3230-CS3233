@@ -53,6 +53,16 @@ struct HopcroftKarp {
         }
         return matching;
     }
+
+    vector<pair<int, int>> get_matches() {
+        vector<pair<int, int>> pairs;
+        for (int i = 0; i < n; i++) {
+            if (matchL[i] != -1) {
+                pairs.push_back({i, matchL[i]});
+            }
+        }
+        return pairs;
+    }
 };
 
 struct Blossom {
@@ -136,6 +146,17 @@ struct Blossom {
         for (int i = 0; i < n; i++) if (match[i] != -1) result++;
         return result / 2;
     }
+
+    vector<pair<int, int>> get_matches() {
+        vector<pair<int, int>> pairs;
+        for (int i = 0; i < n; i++) {
+            // match[i] > i ensures we only count each edge once
+            if (match[i] != -1 && match[i] > i) {
+                pairs.push_back({i, match[i]});
+            }
+        }
+        return pairs;
+    }
 };
 
 #include <bits/stdc++.h>
@@ -199,6 +220,18 @@ struct Hungarian {
             } while (j0);
         }
         return -v[0]; // The max weight (if you negated for min-cost)
+    }
+
+    vector<pair<int, int>> get_matches() {
+        vector<pair<int, int>> pairs;
+        for (int j = 1; j <= n; j++) {
+            if (p[j] != 0) {
+                // Returns {row_index, column_index}
+                // Note: Use p[j] - 1 and j - 1 if you want 0-based output
+                pairs.push_back({p[j], j});
+            }
+        }
+        return pairs;
     }
 };
 
