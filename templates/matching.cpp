@@ -132,6 +132,28 @@ struct Blossom {
     }
 
     int max_matching() {
+        // Randomized Greedy Pre-processing
+        vector<int> nodes(n);
+        iota(nodes.begin(), nodes.end(), 0);
+        
+        // Randomize the order of vertices to process
+        static mt19937 rng(time(0));
+        shuffle(nodes.begin(), nodes.end(), rng);
+    
+        for (int u : nodes) {
+            if (match[u] == -1) {
+                // Optional: Shuffle adjacency list for even more randomness
+                // shuffle(adj[u].begin(), adj[u].end(), rng);
+                for (int v : adj[u]) {
+                    if (match[v] == -1) {
+                        match[u] = v;
+                        match[v] = u;
+                        break; 
+                    }
+                }
+            }
+        }
+        
         int result = 0;
         for (int i = 0; i < n; i++) {
             if (match[i] == -1) {
