@@ -199,7 +199,11 @@ struct Hungarian {
 
     // We use 1-based indexing for this specific implementation
     void set_weight(int i, int j, ll w) {
-        a[i][j] = w; 
+        a[i][j] = -w; 
+    }
+
+    void add_weight(int i, int j, ll w) {
+        a[i][j] += -w; 
     }
 
     ll solve() {
@@ -241,7 +245,7 @@ struct Hungarian {
                 j0 = j1;
             } while (j0);
         }
-        return -v[0]; // The max weight (if you negated for min-cost)
+        return v[0]; // The max weight (if you negated for min-cost)
     }
 
     vector<pair<int, int>> get_matches() {
