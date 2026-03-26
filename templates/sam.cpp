@@ -72,6 +72,19 @@ struct SAM {
     }
 };
 
+string get_smallest_cyclic_shift(int original_n) {
+    int curr = 0;
+    string res = "";
+    for (int i = 0; i < original_n; i++) {
+        // map stores keys in sorted order, 
+        // so begin() is the smallest character transition
+        auto it = st[curr].next.begin(); 
+        res += it->first;
+        curr = it->second;
+    }
+    return res;
+}
+
 int main() {
     string A = "banana";
     SAM sam(A);
@@ -108,6 +121,14 @@ int main() {
         curr = sam.st[curr].next[c];
     }
     cout << "Occurrences of 'ana' in 'banana': " << (exists ? sam.st[curr].count : 0) << endl;
+
+    // 4. Lexicographically smallest cyclic shift
+    string s = "baca";
+    string doubled = s + s;
+    SAM sam(doubled);
+
+    cout << "Smallest cyclic shift of 'baca': " 
+         << sam.get_smallest_cyclic_shift(s.size()) << endl;
 
     return 0;
 }
