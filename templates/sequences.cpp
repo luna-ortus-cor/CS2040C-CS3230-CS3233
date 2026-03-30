@@ -178,6 +178,17 @@ void genInversions(int n, int k, int mod) {
     }
 }
 
+// The number of paths from (0,0) to (n,m) using up, down or diagonal
+long long D[1001][1001];
+void genDelannoy(int n, int m, int mod) {
+    for (int i = 0; i <= n; i++) {
+        for (int j = 0; j <= m; j++) {
+            if (i == 0 || j == 0) D[i][j] = 1;
+            else D[i][j] = (D[i-1][j] + D[i][j-1] + D[i-1][j-1]) % mod;
+        }
+    }
+}
+
 // more fibonacci
 struct matrix {
     long long mat[2][2];
@@ -229,3 +240,5 @@ pair<int, int> fib (int n) {
     else
         return {c, d};
 }
+
+//TODO test and add more
