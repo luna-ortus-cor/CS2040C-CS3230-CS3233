@@ -241,4 +241,10 @@ pair<int, int> fib (int n) {
         return {c, d};
 }
 
+// The max number of pieces a circle can be cut into with n straight cuts
+// ALternative calculation nC2 + nC1 + nC0
+long long genLazyCaterer(long long n) {
+    return (n * n + n + 2) / 2;
+}
+
 //TODO test and add more
