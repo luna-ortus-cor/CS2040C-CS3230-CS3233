@@ -65,3 +65,26 @@ struct SuffixArray {
         }
     }
 };
+
+int main() {
+    string s = "banana";
+    SuffixArray sa(s);
+
+    cout << "Suffix Array of 'banana': ";
+    for (int x : sa.sa) cout << x << " "; 
+    // Output: 5 (a), 3 (ana), 1 (anana), 0 (banana), 4 (na), 2 (nana)
+    cout << endl;
+
+    // 1. Longest Repeated Substring
+    int max_lcp = 0;
+    for (int x : sa.lcp) max_lcp = max(max_lcp, x);
+    cout << "Longest Repeated Substring length: " << max_lcp << endl; // 3 ("ana")
+
+    // 2. Distinct Substrings
+    long long n = s.size();
+    long long distinct = n * (n + 1) / 2;
+    for (int x : sa.lcp) distinct -= x;
+    cout << "Distinct Substrings: " << distinct << endl; // 15
+
+    return 0;
+}
