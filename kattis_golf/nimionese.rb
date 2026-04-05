@@ -1,0 +1,1 @@
+h='bcdgknpt';puts gets.split.map{|w|s=w.split'-';l=h.chars.min_by{(_1.ord-s[0][0].downcase.ord).abs};s[0][0]=w[0].upcase==w[0]?l.upcase : l;s[1..].map{_1.gsub!(/[bcdgknpt]/,l)};r=s.join;h[r[-1].downcase]?r+%w(a o u).min_by{(_1.ord-r[-1].downcase.ord).abs}+?h:r}.join' '
