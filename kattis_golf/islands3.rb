@@ -1,0 +1,1 @@
+r,c=gets.split.map &:to_i;g=$<.to_a;v=Array.new(r){Array.new(c)};d=->i,j{return if i<0||i>=r||j<0||j>=c||v[i][j]||g[i][j]>?L;v[i][j]=1;d[i+1,j];d[i-1,j];d[i,j+1];d[i,j-1]};p (0...r).sum{|i|(0...c).count{|j|g[i][j]==?L&&!v[i][j]&&(d[i,j];true)}}
